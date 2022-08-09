@@ -21,4 +21,43 @@ class Place(models.Model):
     def __str__(self):
         return self.name
 
+#poder agregar un comentario a un lugar
+class Comentario(models.Model):
+    comment = models.CharField(max_length=100)
 
+    class Meta:
+        db_table = 'comentarios'
+    def __str__(self):
+        return self.comment
+
+'''
+class Comentario(models.Model):
+    like = models.IntegerField(max_value=None, min_value=None)
+    dislike = models.IntegerField(max_value=None, min_value=None)
+
+    class Meta:
+        db_table = 'likes'
+    def __str__(self):
+        return self.like
+'''
+# likes o dislikes 
+
+
+#registro de usuarios
+class User(models.Model):
+    name = models.CharField(max_length=40)
+    email = models.CharField(max_length=100)
+    username = models.CharField(max_length=40)
+    password = models.CharField(max_length=20)
+    is_active = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering=["-update_at"] #ver la informacion por fecha mas reciente
+        def __str__(self):
+            return self.username #ver por username 
+
+    
