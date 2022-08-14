@@ -12,27 +12,8 @@ class ComentarioSerializer(serializers.ModelSerializer):
         model = Comentario
         fields = '__all__'
 
-'''
-class LikesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Seguro
-        fields = '__all__'
-'''
-
-
 #registro
-'''
-class UserSingUpSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ["name",
-        "username",
-        "password",
-        "is_active",
-        "is_verified",
-        "created_at",
-        "update_at"]
-'''
+
 class UserSingUpSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
