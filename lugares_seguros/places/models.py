@@ -14,6 +14,9 @@ class Place(models.Model):
     address_street = models.CharField(max_length=32)
     address_zipcode = models.CharField(max_length=32)
     image = models.ImageField(upload_to=upload_img, default='imgs_org/default.png', null=True)
+    likes = models.IntegerField(default=0)
+    dislikes = models.IntegerField(default=0)
+    
 
     class Meta:
         db_table ='places' #nombre de la tabla en la base de datos
@@ -21,27 +24,16 @@ class Place(models.Model):
     def __str__(self):
         return self.name
 
+
 #poder agregar un comentario a un lugar
 class Comentario(models.Model):
     comment = models.CharField(max_length=100)
+    place = models.ForeignKey(Place, blank=True, null=True, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'comentarios'
     def __str__(self):
         return self.comment
-
-'''
-class Comentario(models.Model):
-    like = models.IntegerField(max_value=None, min_value=None)
-    dislike = models.IntegerField(max_value=None, min_value=None)
-
-    class Meta:
-        db_table = 'likes'
-    def __str__(self):
-        return self.like
-'''
-# likes o dislikes 
-
 
 #registro de usuarios
 class User(models.Model):
@@ -49,8 +41,8 @@ class User(models.Model):
     email = models.CharField(max_length=100)
     username = models.CharField(max_length=40)
     password = models.CharField(max_length=20)
-    is_active = models.BooleanField(default=False)
-    is_verified = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_verified = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -60,4 +52,3 @@ class User(models.Model):
         def __str__(self):
             return self.username #ver por username 
 
-    
